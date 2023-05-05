@@ -1,0 +1,26 @@
+HKCR
+{
+	MyEventObject.1 = s 'MyEventObject class'
+	{
+		CLSID = s '{a335b284-ec5f-4a52-9214-238d87217bfa}'
+	}
+	MyEventObject = s 'MyEventObject class'
+	{		
+		CurVer = s 'MyEventObject.1'
+	}
+	NoRemove CLSID
+	{
+		ForceRemove {a335b284-ec5f-4a52-9214-238d87217bfa} = s 'MyEventObject class'
+		{
+			ProgID = s 'MyEventObject.1'
+			VersionIndependentProgID = s 'MyEventObject'
+			ForceRemove Programmable
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{b064163c-52ed-434f-bb57-d2eaf7c2367d}'
+			Version = s '1.0'
+		}
+	}
+}

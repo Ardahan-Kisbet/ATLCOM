@@ -1,0 +1,67 @@
+// ATLCOM.idl : IDL source for ATLCOM
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (ATLCOM.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+[
+	object,
+	uuid(7cc1d9e7-2d83-4b68-8931-3538e9c96eed),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IMyComObject : IDispatch
+{
+	[id(1), helpstring("This method does some heavy calculations..")] HRESULT MakeSomeCalculation([out] DOUBLE* input);
+	[id(2)] HRESULT Speak([out] CHAR* param);
+};
+[
+	object,
+	uuid(a494f5d8-53a5-4c21-9283-d34a2ba47a51),
+	dual,
+	nonextensible,
+	pointer_default(unique)
+]
+interface IMyEventObject : IDispatch
+{
+	[id(1)] HRESULT SimpleEvent();
+};
+[
+	uuid(b064163c-52ed-434f-bb57-d2eaf7c2367d),
+	version(1.0),
+]
+library ATLCOMLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(9af4e4ba-87e8-4d2b-b05f-6a21ef5e4e2e)
+	]
+	coclass MyComObject
+	{
+		[default] interface IMyComObject;
+	};
+	[
+		uuid(2b0720ff-09dd-467c-80b0-fdfda20db773)
+	]
+	dispinterface _IMyEventObjectEvents
+	{
+		properties:
+		methods:
+			[id(1), helpstring("Fire Event Testing")] HRESULT FireEventTest([in] DOUBLE receivedValue);
+	};
+	[
+		uuid(a335b284-ec5f-4a52-9214-238d87217bfa)
+	]
+	coclass MyEventObject
+	{
+		[default] interface IMyEventObject;
+		[default, source] dispinterface _IMyEventObjectEvents;
+	};
+};
+
+import "shobjidl.idl";
+import "shobjidl.idl";
